@@ -343,6 +343,7 @@
     "Verify Email Address": "Подтвердить адрес электронной почты",
     "View": "Просмотр",
     "View :name": "Посмотреть :name",
+    "View orders":"Посмотреть заказы",
     "We were unable to find a registered user with this email address.": "Нам не удалось найти зарегистрированного пользователя с этим адресом электронной почты.",
     "Web Server is Down": "Веб-сервер не работает",
     "When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator application.": "Если двухфакторная аутентификация включена, Вам будет предложено ввести случайный токен безопасности во время аутентификации. Вы можете получить этот токен в приложении Google Authenticator Вашего телефона.",

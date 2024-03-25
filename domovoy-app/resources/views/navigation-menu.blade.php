@@ -12,11 +12,19 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link href="{{ route('contractors.index') }}" :active="request()->routeIs('contractors.index')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </div>
+                @if(Auth::user()->role == __('Employer'))
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('employers.index') }}" :active="request()->routeIs('employers.index')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    </div>
+                @elseif(Auth::user()->role==__('Contractor'))
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link href="{{ route('contractors.index') }}" :active="request()->routeIs('contractors.index')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                    </div>
+                @endif
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ms-6">

@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ContractorController;
+use App\Http\Controllers\EmployerController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,7 +15,11 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        if(Auth::user()->role == __('Employer')) return redirect('employers');
+        else if(Auth::user()->role==__('Contractor')) return redirect('contractors');
+        else return view('dashboard');
     })->name('dashboard');
-    Route::resource('/contractors', ContractorController::class)->only(['index','show']);
+    Route::resource('/contractors', ContractorController::class);
+    Route::resource('/employers', EmployerController::class);
+
 });
