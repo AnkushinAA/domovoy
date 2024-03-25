@@ -19,7 +19,7 @@ class Order extends Model
         'type_of_work_id',
         'currency_id',
         'employer_id',
-        'role',
+        'contractor_id'
         'published_at',
         'start_at',
         'finish_at',
@@ -41,7 +41,11 @@ class Order extends Model
             'published_at'=> 'datetime',
             'start_at'=> 'datetime',
             'finish_at'=> 'datetime',
-        '   finished_at' => 'datetime',
+            'finished_at' => 'datetime',
+            'type_of_work_id'=>'integer',
+            'currency_id'=>'integer',
+            'employer_id'=>'integer',
+            'contractor_id'=>'integer',
 
         ];
     }

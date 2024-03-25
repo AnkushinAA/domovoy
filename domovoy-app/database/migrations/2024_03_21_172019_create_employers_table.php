@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('user_id');
             $table->integer('count_orders');
             $table->integer('count_orders_finish');
-            $table->integer('employer_id');
+            $table->integer('estimate');
         });
     }
 

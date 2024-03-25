@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contractors', function (Blueprint $table) {
+        Schema::create('estimations', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('user_id');
-            $table->integer('count_orders');
-            $table->integer('count_orders_finish');
+            $table->integer('user_appraiser_id');
+            $table->integer('user_of_estimation_id');
             $table->integer('estimate');
+            $table->string('discription');
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contractors');
+        Schema::dropIfExists('estimations');
     }
 };

@@ -17,7 +17,7 @@ class Employer extends Model
         'user_id',
         'count_orders',
         'count_orders_finish',
-        'employer_id',
+        'estimate',
     ];
 
     protected function casts(): array

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('type_of_work_id');
             $table->integer('currency_id');
             $table->integer('employer_id');
+            $table->integer('contractor_id')->nulable();
             $table->dateTime('published_at');
             $table->dateTime('start_at');
             $table->dateTime('finish_at');
