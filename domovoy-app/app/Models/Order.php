@@ -19,8 +19,11 @@ class Order extends Model
         'type_of_work_id',
         'currency_id',
         'employer_id',
-        '',
         'role',
+        'published_at',
+        'start_at',
+        'finish_at',
+        'finished_at',
     ];
 
        /**
@@ -29,7 +32,17 @@ class Order extends Model
      * @var array<int, string>
      */
     protected $appends = [
-        'profile_photo_url',
+        'order_photo_url',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'published_at'=> 'datetime',
+            'start_at'=> 'datetime',
+            'finish_at'=> 'datetime',
+        '   finished_at' => 'datetime',
+
+        ];
+    }
 }
