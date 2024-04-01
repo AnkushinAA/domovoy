@@ -19,7 +19,7 @@ class Order extends Model
         'type_of_work_id',
         'currency_id',
         'employer_id',
-        'contractor_id'
+        'contractor_id',
         'published_at',
         'start_at',
         'finish_at',
@@ -35,6 +35,11 @@ class Order extends Model
         'order_photo_url',
     ];
 
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
     protected function casts(): array
     {
         return [
@@ -46,7 +51,6 @@ class Order extends Model
             'currency_id'=>'integer',
             'employer_id'=>'integer',
             'contractor_id'=>'integer',
-
         ];
     }
 }

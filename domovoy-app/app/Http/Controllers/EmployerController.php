@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contractor;
 use App\Models\Employer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmployerController extends Controller
 {
@@ -12,7 +14,16 @@ class EmployerController extends Controller
      */
     public function index()
     {
-        return view('employers/employer');
+        $contractor=Contractor::where('user_id', Auth::user()->id)->first();
+        if(!$contractor){
+                Contractor::create([
+                    'user_id'=>Auth::user()->id,
+                    'count_orders'=>0,
+                    'count_orders_finish'=>0,
+                    'estimate'=>5,
+                ]);
+        }
+        return view('dashboard');
     }
 
     /**

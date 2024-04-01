@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('employers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('user_id');
+            $table->integer('user_id')->unique();
             $table->integer('count_orders');
             $table->integer('count_orders_finish');
             $table->integer('estimate');

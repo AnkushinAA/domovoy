@@ -15,8 +15,8 @@ Route::middleware([
     'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        if(Auth::user()->role == __('Employer')) return redirect('employers');
-        else if(Auth::user()->role==__('Contractor')) return redirect('contractors');
+        if(Auth::user()->role == __('Employer')) return redirect('contractors');
+        else if(Auth::user()->role==__('Contractor')) return redirect('employers');
         else return view('dashboard');
     })->name('dashboard');
     Route::resource('/contractors', ContractorController::class);

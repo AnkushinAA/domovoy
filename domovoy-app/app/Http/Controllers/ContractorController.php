@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Contractor;
+use App\Models\Employer;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ContractorController extends Controller
 {
@@ -12,7 +16,20 @@ class ContractorController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $employer=Employer::where('user_id', Auth::user()->id)->first();
+        if(!$employer){
+                Employer::create([
+                    'user_id'=>Auth::user()->id,
+                    'count_orders'=>0,
+                    'count_orders_finish'=>0,
+                    'estimate'=>5,
+                ]);
+        }
+        $contractors=DB::table('contractors')
+            ->join('users', 'users.id', '=', 'contractors.user_id')
+            ->select('contractors.*','users.name','users.id' )
+            ->get();
+        return view('employers/employer', compact('contractors'));
     }
 
     /**

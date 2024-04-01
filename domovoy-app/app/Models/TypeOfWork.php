@@ -16,7 +16,7 @@ class TypeOfWork extends Model
     protected $fillable = [
         'name',
         'price',
-        'currency_id'
+        'currency_id',
         'unit_id',
         'description',
     ];

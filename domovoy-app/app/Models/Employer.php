@@ -20,13 +20,18 @@ class Employer extends Model
         'estimate',
     ];
 
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
     protected function casts(): array
     {
         return [
-            'ser_id' => 'integer',
+            'user_id' => 'integer',
             'count_orders' => 'integer',
             'count_orders_finish'=>'integer',
-            'employer_id'=>'integer',
+            'estimate'=>'integer',
         ];
     }
 }
