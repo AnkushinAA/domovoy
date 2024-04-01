@@ -20,7 +20,8 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('orders.order-create');
     }
 
     /**

@@ -28,7 +28,9 @@
                                 <td class="border border-slate-600 p-2 text-center">{{$contractor->estimate}}</td>
                                 <td class="border border-slate-600 p-2 text-center">{{$contractor->count_orders}}</td>
                                 <td class="border border-slate-600 p-2 text-center">{{$contractor->count_orders_finish}}</td>
-                                <td class="border border-slate-600 p-2 text-center"> <a href="">{{__('Show')}}</a></td>
+                                <td class="border border-slate-600 p-2 text-center">
+                                    <a class="text-sky-500" href="{{route('contractors.show', $contractor->user_id)}}">{{__('Show')}}</a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -36,7 +38,7 @@
                 @endif
             </div>
             <x-button >
-                <a href="">{{__('Add an order')}}</a>
+                <a href="{{route('orders.create')}}">{{__('Add an order')}}</a>
             </x-button>
         </div>
     </div>
