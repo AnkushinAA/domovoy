@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('type_of_works', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('price');
-            $table->string('unit');
+            $table->integer('price');
+            $table->integer('unit_id');
+            $table->integer('currency_id');
             $table->string('description')->nullable();
             $table->timestamps();
         });

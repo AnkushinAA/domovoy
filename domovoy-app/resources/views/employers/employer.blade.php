@@ -11,10 +11,10 @@
                 @if($contractors->isEmpty())
                     <p>{{'not contactors'}}</p>
                 @else
-                    <table class="border-callapse border border-slate-500">
+                    <table class="border-callapse border border-slate-500 mx-4">
                         <thead >
                             <tr>
-                                <th class="border border-slate-600 px-4">{{__('Name')}}</th>
+                                <th class="border border-slate-600 px-4">{{__('Contractors name')}}</th>
                                 <th class="border border-slate-600 px-4">{{__('Estimate')}}</th>
                                 <th class="border border-slate-600 px-4">{{__('Count orders')}}</th>
                                 <th class="border border-slate-600 px-4">{{__('Number of completed orders')}}</th>
@@ -29,8 +29,9 @@
                                 <td class="border border-slate-600 p-2 text-center">{{$contractor->count_orders}}</td>
                                 <td class="border border-slate-600 p-2 text-center">{{$contractor->count_orders_finish}}</td>
                                 <td class="border border-slate-600 p-2 text-center">
-                                    <a class="text-sky-500" href="{{route('contractors.show', $contractor->user_id)}}">{{__('Show')}}</a>
+                                    <a class="text-sky-500" href="{{route('contractors.show', $contractor->id)}}">{{__('Show')}}</a>
                                 </td>
+
                             </tr>
                             @endforeach
                         </tbody>

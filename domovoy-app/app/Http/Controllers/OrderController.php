@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\order;
+use App\Models\TypeOfWork;
+use App\Models\Unit;
+use App\Models\User;
+use App\Models\Сurrency;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -20,8 +25,9 @@ class OrderController extends Controller
      */
     public function create()
     {
-
-        return view('orders.order-create');
+        $types = TypeOfWork::all();
+        $currencies = Сurrency::all();
+        return view('orders.order-create', compact('types', 'currencies'));
     }
 
     /**

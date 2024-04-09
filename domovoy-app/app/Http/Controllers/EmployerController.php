@@ -14,15 +14,6 @@ class EmployerController extends Controller
      */
     public function index()
     {
-        $contractor=Contractor::where('user_id', Auth::user()->id)->first();
-        if(!$contractor){
-                Contractor::create([
-                    'user_id'=>Auth::user()->id,
-                    'count_orders'=>0,
-                    'count_orders_finish'=>0,
-                    'estimate'=>5,
-                ]);
-        }
         return view('dashboard');
     }
 

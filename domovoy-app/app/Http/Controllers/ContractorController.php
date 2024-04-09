@@ -16,18 +16,9 @@ class ContractorController extends Controller
      */
     public function index()
     {
-        $employer=Employer::where('user_id', Auth::user()->id)->first();
-        if(!$employer){
-                Employer::create([
-                    'user_id'=>Auth::user()->id,
-                    'count_orders'=>0,
-                    'count_orders_finish'=>0,
-                    'estimate'=>5,
-                ]);
-        }
         $contractors=DB::table('contractors')
-            ->join('users', 'users.id', '=', 'contractors.user_id')
-            ->select('contractors.*','users.name','users.id' )
+            ->join('users', 'contractors.user_id', '=', 'users.id',  )
+            ->select('contractors.*','users.name',)
             ->get();
         return view('employers/employer', compact('contractors'));
     }
@@ -53,7 +44,9 @@ class ContractorController extends Controller
      */
     public function show(Contractor $contractor)
     {
-        //
+
+        $user=User::where('id', ($contractor->user_id))->first();
+        return view('employers/show_contractor', compact('contractor', 'user'));
     }
 
     /**

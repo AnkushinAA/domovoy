@@ -7,36 +7,54 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 w-1/3">
             <form method="POST" action="{{ route('orders.store') }}">
                 @csrf
 
                 <div>
-                    <x-label for="name" value="{{ __('Name') }}" />
+                    <x-label for="name" value="{{ __('Title') }}" />
                     <x-input id="name" class="block mt-1 w-full" type="email" name="name" :value="old('name')" required autofocus autocomplete="наименование" />
                 </div>
 
                 <div class="mt-4">
-                    <x-label for="password" value="{{ __('Password') }}" />
-                    <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                    <x-label for="date" value="{{ __('Start date') }}" />
+                    <x-input id="date" class="block mt-1 w-full" type="date" name="date" required value="{{date('dd.mm.yy')}}" />
                 </div>
 
-                <div class="block mt-4">
-                    <label for="remember_me" class="flex items-center">
-                        <x-checkbox id="remember_me" name="remember" />
-                        <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                    </label>
+                <div class="mt-4">
+                    <x-label for="date_end" value="{{ __('Finish date') }}" />
+                    <x-input id="date_end" class="block mt-1 w-full" type="date" name="date_end" required/>
                 </div>
+
+                <div class="mt-4 2xl:flex space-x-2">
+                    <div class="mt-4">
+                        <x-label for="type" value="{{ __('Type of work') }}" />
+                        <select class="border-gray-200 rounded-lg" name="type" id="type">
+                            @foreach($types as $type)
+                                <option value="">{{$type->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mt-4">
+                        <x-label for="number" value="{{ __('Number') }}" />
+                        <x-input class="w-32" id="number" type="number" name="number" :value="old('number')" required autofocus autocomplete="количество" />
+                    </div>
+
+                    <div class="mt-4">
+                        <x-label for="currency" value="{{ __('Currency') }}" />
+                        <select class="border-gray-200 rounded-lg" name="currencu" id="currency">
+                            @foreach($currencies as $currency)
+                                <option value="">{{$currency->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
 
                 <div class="flex items-center justify-end mt-4">
-                    @if (Route::has('password.request'))
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                            {{ __('Forgot your password?') }}
-                        </a>
-                    @endif
-
                     <x-button class="ms-4">
-                        {{ __('Log in') }}
+                        {{ __('Create') }}
                     </x-button>
                 </div>
             </form>
