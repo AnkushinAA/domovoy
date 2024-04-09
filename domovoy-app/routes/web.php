@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContractorController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\TypeOfWorkController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +24,5 @@ Route::middleware([
     Route::resource('/contractors', ContractorController::class);
     Route::resource('/employers', EmployerController::class);
     Route::resource('/orders', OrderController::class);
-
+    Route::resource('/type_of_work', TypeOfWorkController::class);
 });

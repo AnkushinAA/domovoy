@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\order;
+use App\Models\Curr;
+use App\Models\Order;
 use App\Models\TypeOfWork;
-use App\Models\Unit;
-use App\Models\User;
-use App\Models\Сurrency;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
@@ -17,7 +17,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::where('id', Auth::user()->id)->get();
+        return view('orders.show', compact('orders'));
     }
 
     /**
@@ -26,7 +27,7 @@ class OrderController extends Controller
     public function create()
     {
         $types = TypeOfWork::all();
-        $currencies = Сurrency::all();
+        $currencies = Curr::all();
         return view('orders.order-create', compact('types', 'currencies'));
     }
 
@@ -35,7 +36,20 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        dd($request);
+        $type=TypeOfWork::where('id', $request->type)->first();
+        Order::create([
+            'name'=>$request->name,
+            'type_of_work_id'=>$request->type,
+            'currency_id'=>$request->currency,
+            'employer_id'=>Auth::user()->id,
+            'published_at'=>Carbon::now(),
+            'start_at'=>$request->date,
+            'finish_at'=>$request->date_end,
+
+        ]);
+        return redirect('orders.index');
     }
 
     /**
