@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contractor;
 use App\Models\Curr;
 use App\Models\Order;
 use App\Models\TypeOfWork;
@@ -9,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class OrderController extends Controller
 {
@@ -17,8 +19,15 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::where('id', Auth::user()->id)->get();
-        return view('orders.show', compact('orders'));
+        $orders=DB::table('orders')
+            ->join('type_of_works', 'orders.type_of_work_id', '=', 'type_of_works.id')
+            ->join('currs','orders.currency_id','=','currs.id')
+            ->select('orders.*','type_of_works.name','type_of_works.price','type_of_works.description', 'currs.symbol')
+            ->orderBy('published_at')
+            ->having('employer_id','=', Auth::user()->id)
+            ->get();
+        $contractors=Contractor::all();
+        return view('orders.show', compact('orders', 'contractors'));
     }
 
     /**
@@ -36,20 +45,28 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        $validate = $request->validate([
+            'name'=>'required|string|max:255',
+            'image'=>'mimes:jpeg,jpg',
+            'date'=>'required|date|after_or_equal:today',
+            'date_end'=>'required|date|after:tomorrow',
+            'currency'=>'string',
+        ]);
 
-        dd($request);
+        // $path= $request->file('image')->store('orders');
+        $path = Storage::disk('public')->putFile('orders', $request->file('image'));
         $type=TypeOfWork::where('id', $request->type)->first();
         Order::create([
-            'name'=>$request->name,
-            'type_of_work_id'=>$request->type,
-            'currency_id'=>$request->currency,
+            'name'=>$validate['name'],
+            'type_of_work_id'=>$type->id,
+            'currency_id'=>$validate['currency'],
             'employer_id'=>Auth::user()->id,
             'published_at'=>Carbon::now(),
-            'start_at'=>$request->date,
-            'finish_at'=>$request->date_end,
-
+            'start_at'=>$validate['date'],
+            'finish_at'=>$validate['date_end'],
+            'order_photo_url'=>$path,
         ]);
-        return redirect('orders.index');
+        return redirect('orders');
     }
 
     /**

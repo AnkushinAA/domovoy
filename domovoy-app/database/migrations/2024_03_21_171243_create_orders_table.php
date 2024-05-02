@@ -18,12 +18,12 @@ return new class extends Migration
             $table->integer('type_of_work_id');
             $table->integer('currency_id');
             $table->integer('employer_id');
-            $table->integer('contractor_id')->nulable();
+            $table->integer('contractor_id')->nullable();
             $table->dateTime('published_at');
             $table->dateTime('start_at');
             $table->dateTime('finish_at');
-            $table->dateTime('finished_at')->nulale();
-            $table->string('order_photo_url', 2048)->nullable();
+            $table->dateTime('finished_at')->nullable();
+            $table->string('order_photo_url')->default('');
         });
     }
 

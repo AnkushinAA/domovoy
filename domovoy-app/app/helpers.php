@@ -3,6 +3,8 @@
 use App\Models\TypeOfWork;
 use App\Models\Curr;
 use App\Models\Unit;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 if(!function_exists('dataOrders')){
     function dataOrders(){
@@ -39,5 +41,18 @@ if(!function_exists('dataOrders')){
                 'unit_id'=>$type['unit_id'],
             ]);
         }
+        $inputs=array(
+            ['name'=>'Алексей','email'=>'r141d@mail.ru','phonefield'=>'+79091016633','role'=> 'Заказчик','password' =>'12345678',],
+            ['name'=>'Константин','email'=>'a@mail.ru','phonefield'=>'+79000000000','role'=> 'Подрядчик','password' =>'12345678',],
+            ['name'=>'Петр','email'=>'b@mail.ru','phonefield'=>'+79000000001','role'=> 'Подрядчик','password' =>'12345678',]
+        );
+        foreach($inputs as $input){
+        User::create([
+            'name' => $input['name'],
+            'email' => $input['email'],
+            'phonefield'=>$input['phonefield'],
+            'role'=> $input['role'],
+            'password' => Hash::make($input['password'])
+        ]);}
     }
 }

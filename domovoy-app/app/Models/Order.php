@@ -24,6 +24,7 @@ class Order extends Model
         'start_at',
         'finish_at',
         'finished_at',
+        'order_photo_url',
     ];
 
        /**
@@ -32,7 +33,7 @@ class Order extends Model
      * @var array<int, string>
      */
     protected $appends = [
-        'order_photo_url',
+
     ];
 
     /**

@@ -11,19 +11,21 @@
                 @if($orders->isEmpty())
                     <p>{{__('Нет заказов')}}</p>
                 @else
+
                     @foreach($orders as $order)
-                        <p>id- {{$order->id}}</p>
-                        <p>name - {{$order->name}}</p>
-                        <p>type - {{$order->type_of_work_id}}</p>
-                        <p>currency - {{$order->currency_id}}</p>
-                        <p>employer - {{$order->employer_id}}</p>
-                        <p>contractor - {{$order->contractor_id}}</p>
-                        <p>published - {{$order->published_at}}</p>
-                        <p>start - {{$order->start_at}}</p>
-                        <p>finish - {{$order->finish_at}}</p>
-                        <p>finished - {{$order->finished_at}}</p>
-                        <p>photo - {{$order->order_rhoto_url}}</p>
-                        <p>создана - {{$order->created_at}}</p>
+                    <div class="flex border border-collapse">
+                        <div class="p-2">
+                            <img class="object-cover h-48 " src="{{'/storage/'.$order->order_photo_url}}" alt="{{__('Order')}}">
+                        </div>
+                        <div class="p-2">
+                            <p class="text-xl">Заказ: {{$order->name}}</p>
+                            <p>Начало: {{date('d.m.Y',strtotime($order->start_at))}}</p>
+                            <p>Окончание: {{date('d.m.Y',strtotime($order->finish_at))}}</p>
+                            <p>Статус заказа: {{$order->finished_at ? date('d.m.Y',strtotime($order->finished_at)):'В работе'}}</p>
+                            <p>Cоздан - {{date('d.m.Y',strtotime($order->published_at))}}</p>
+                        </div>
+                    </div>
+
                     @endforeach
                 @endif
                 <x-button class="my-2">

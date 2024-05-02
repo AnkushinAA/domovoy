@@ -8,9 +8,9 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 w-1/3">
-            <form method="POST" action="{{ route('orders.store') }}">
+            <form method="POST" action="{{ route('orders.store') }}" enctype="multipart/form-data">
                 @csrf
-
+                <x-errors/>
                 <div>
                     <x-label for="name" value="{{ __('Title') }}" />
                     <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="наименование" />
@@ -18,7 +18,7 @@
 
                 <div class="mt-4">
                     <x-label for="date" value="{{ __('Start date') }}" />
-                    <x-input id="date" class="block mt-1 w-full" type="date" name="date" required value="{{date('dd.mm.yy')}}"/>
+                    <x-input id="date" class="block mt-1 w-full" type="date" name="date" required />
                 </div>
 
                 <div class="mt-4">
@@ -38,7 +38,7 @@
 
                     <div class="mt-4">
                         <x-label for="number" value="{{ __('Number') }}" />
-                        <x-input class="w-32" id="number" type="number" name="number" :value="old('number')" required autofocus autocomplete="количество" :value="old('number')" />
+                        <x-input class="w-32" id="number" type="number" name="number" :value="old('number')" required :value="old('number')" />
                     </div>
 
                     <div class="mt-4">
@@ -49,6 +49,11 @@
                             @endforeach
                         </select>
                     </div>
+                </div>
+
+                <div class="mt-4">
+                    <x-label for="image" value="{{ __('Image') }}" />
+                    <x-input class="w-50 p-1" id="Image" type="file" name="image" accept="image/*" :value="old('image')"/>
                 </div>
 
 
